@@ -1,0 +1,35 @@
+---
+title: "AnaisysReport"
+author: "Marco Forgia"
+date: "31/03/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Introduction
+
+Analysis about the 2010 gun murders in USA, already wrangled data are available in this directory 
+```{r}
+load("rda/murders.rda")
+```
+
+the analysis was conducted using this library:
+
+```{r loading-libs, message=FALSE}
+library(tidyverse)
+```
+
+and complete information about the analysis could be found in the README.txt file.
+
+## Murder rate by state
+
+the analysis shows great variability in the gun murder rate from state to state
+```{r murder-rate-by-state, echo=FALSE}
+murders %>% mutate(abb=reorder(abb,rate)) %>% 
+  ggplot(aes(abb,rate))+ 
+  geom_bar(stat="identity", width = 0.5, color="black")+
+  coord_flip()
+```
+
